@@ -49,6 +49,7 @@ Docker Setup (Optional)
 If you want to run the application using Docker, follow these steps:
    ```bash
    docker-compose up --build
+
 Access the application at http://localhost:9000
 
 
