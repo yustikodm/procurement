@@ -40,9 +40,9 @@ Update the database connection details in your .env file.
    ```bash
    php artisan migrate
 
-8. **Run Development Build**
+8. **Run Build**
    ```bash
-   npm run dev
+   npm run build
 
 9. **Running the Application**
    ```bash
