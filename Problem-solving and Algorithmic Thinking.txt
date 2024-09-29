@@ -1,0 +1,64 @@
+Identifying the Problem
+Untuk mengatasi lambatnya performa search dan filter dalam product catalog, kita perlu mencari tahu apa yang menyebabkan lag tersebut. Berikut adalah langkah-langkah yang bisa kita lakukan:
+
+Database Profiling:
+
+Kita bisa mulai dengan memeriksa database menggunakan tools yang memungkinkan kita melihat bagaimana query berjalan. Misalnya, menggunakan perintah EXPLAIN di MySQL dapat membantu kita memahami apakah query kita berjalan secara efisien atau jika mereka menyebabkan full table scans.
+Melihat log query juga akan memberikan wawasan tentang query mana yang memakan waktu terlalu lama dan mungkin berkontribusi pada keseluruhan performa yang lambat.
+Tools monitoring seperti New Relic atau Datadog dapat membantu memantau kesehatan dan metrik performa database.
+Benchmarking:
+
+Kita dapat mensimulasikan beban berat menggunakan tools seperti JMeter untuk melihat bagaimana sistem berperilaku di bawah tekanan. Ini bisa membantu kita mengidentifikasi bottlenecks.
+Mengukur waktu respons untuk berbagai query juga akan membantu kita menemukan di mana masalahnya.
+Code Review:
+
+Melakukan tinjauan mendalam pada kode yang bertanggung jawab untuk searching dan filtering sangat penting untuk menemukan logika yang tidak efisien atau panggilan database yang berulang.
+Proposing a Solution
+Setelah kita mengidentifikasi potensi masalah, mari kita bahas beberapa perubahan yang bisa kita lakukan:
+
+Indexing:
+
+Menambahkan index pada kolom yang sering dicari dapat secara drastis mempercepat waktu query. Misalnya, mengindeks product_name, vendor_id, dan category_id akan sangat membantu.
+Jika kita berurusan dengan banyak teks, menggunakan full-text search indexes bisa sangat meningkatkan performa.
+Search Optimization:
+
+Memperkenalkan search engine seperti Elasticsearch bisa menjadi solusi besar. Ini dirancang untuk pencarian cepat dan dapat menangani dataset besar dengan efisien, memberikan kita fitur seperti toleransi kesalahan ketik dan penilaian relevansi.
+Caching adalah strategi hebat lainnya. Dengan mencache hasil pencarian yang sering diakses menggunakan sesuatu seperti Redis, kita dapat mengurangi hit database yang berulang.
+Database Optimization:
+
+Jika beberapa joins memperlambat proses, kita mungkin perlu mempertimbangkan untuk denormalisasi beberapa data.
+Partitioning pada tabel produk juga bisa membantu seiring kita berkembang, memudahkan database untuk mengelola jumlah data yang besar.
+Planning the Implementation
+Kita ingin menerapkan perubahan ini tanpa mengganggu semuanya:
+
+Incremental Changes:
+
+Kita bisa mulai dengan menambahkan index dan memantau peningkatan performa. Sebaiknya kita menguji semuanya di lingkungan staging terlebih dahulu.
+Secara bertahap membawa Elasticsearch akan memungkinkan pengguna untuk menikmati fungsionalitas pencarian yang lebih baik sambil menjaga setup yang ada.
+A/B Testing:
+
+Melakukan A/B tests akan membantu kita membandingkan pengalaman pengguna antara metode pencarian yang lama dan baru. Dengan cara ini, kita bisa menyempurnakan pendekatan kita berdasarkan umpan balik pengguna yang nyata.
+Gradual Migration:
+
+Migrasi data produk ke Elasticsearch dapat dilakukan dalam batch. Menggunakan background job untuk ini akan membantu kita menghindari penundaan selama jam sibuk.
+Documentation and Training:
+
+Sangat penting untuk mendokumentasikan semua perubahan dengan jelas dan memberikan pelatihan kepada tim tentang cara menggunakan sistem baru.
+Preparing for Growth
+Untuk memastikan solusi kita dapat menangani lebih banyak produk di masa depan:
+
+Scalability Considerations:
+
+Kita harus mempertimbangkan opsi scaling baik vertikal maupun horizontal untuk database dan search engine kita seiring bertambahnya catalog.
+Load balancers dapat membantu mendistribusikan traffic secara merata di antara server, menjaga semuanya tetap berjalan lancar.
+Regular Maintenance:
+
+Melaksanakan tugas pemeliharaan rutin untuk database akan menjaga performa, seperti memperbarui statistik dan mengatur kembali index yang terfragmentasi.
+Monitoring and Alerts:
+
+Menerapkan monitoring dan alerts akan memungkinkan kita menangkap masalah performa sebelum menjadi masalah serius.
+Data Archiving:
+
+Seiring dengan berkembangnya product catalog kita, kita mungkin ingin mempertimbangkan untuk mengarsipkan produk-produk lama yang tidak sering diakses. Ini dapat membantu menjaga dataset aktif lebih kecil dan lebih mudah dikelola.
+Conclusion
+Dengan mengambil pendekatan sistematis—mengidentifikasi masalah, mengusulkan solusi praktis, merencanakan implementasi dengan hati-hati, dan mempersiapkan pertumbuhan di masa depan—kita dapat secara signifikan meningkatkan fungsionalitas pencarian dan filter dari product catalog kita. Ini tidak hanya menangani masalah performa saat ini tetapi juga menyiapkan kita untuk menangani dataset yang lebih besar di masa depan.

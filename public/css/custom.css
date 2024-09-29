@@ -1,0 +1,52 @@
+/* public/css/custom.css */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #0d6efd !important; /* Primary color on hover */
+}
+
+.btn {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-outline-success:hover {
+    background-color: #198754;
+    color: white;
+}
+
+/* Add some margin to the buttons in the navbar */
+.btn-sm {
+    margin-left: 10px;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Alerts Styling */
+.alert {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
