@@ -40,7 +40,11 @@ Update the database connection details in your .env file.
    ```bash
    php artisan migrate
 
-8. **Running the Application**
+8. **Run Development Build**
+   ```bash
+   npm run dev
+
+9. **Running the Application**
    ```bash
    php artisan serve
 Access the application at http://localhost:8000.
