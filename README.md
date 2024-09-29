@@ -46,10 +46,12 @@ Update the database connection details in your .env file.
 Access the application at http://localhost:8000.
 
 Docker Setup (Optional)
-Access the application at http://localhost:9000
 If you want to run the application using Docker, follow these steps:
    ```bash
    docker-compose up --build
+
+
+Access the application at http://localhost:9000
 
 
 
